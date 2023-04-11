@@ -12,33 +12,25 @@ import (
     	"github.com/Spankyduck/funtemps/conv"
 )
 
-//Denne pakken blir brukt for aa ha selve funksjonene i. I main.go vil vi kalle paa disse funksjonene.
 
 
 func ConvTemperature() {
 
-	//Setter input og output filnavn.
 
-	//inputFilename := "kjevik-temp-celsius-20220318-20230318.csv"
 	outputFilename := "kjevik-temp-fahr-20220318-20230318.csv"
 
-	//Sjekker om kjevik fahr versjon av filen allerede eksisterer.
 
 	if _, err := os.Stat(outputFilename); err == nil {
-		//Om filen eksisterer spor den om vi vil genere filen paa nytt.
-		fmt.Printf("Fil '%s' eksisterer allerede. Vil du generere filen paa nytt? (j/n): ", outputFilename)
+		fmt.Printf("Fil '%s' finnes allerede. Vil du generere filen paa nytt? (j/n): ", outputFilename)
 		scanner := bufio.NewScanner(os.Stdin)
 		for scanner.Scan() {
 			answer := scanner.Text()
 			if strings.ToLower(answer) == "j" || strings.ToLower(answer) == "ja" {
-				//Om brukeren vil genere filen aa nytt gaar den ut av loopen.
 				break
 			} else if strings.ToLower(answer) == "n" || strings.ToLower(answer) == "nei" {
-				//Om brukeren ikke onsker aa genere filen paa nytt returner den og gaar ut av funksjonen.
-				fmt.Println("Avslutter...")
+				fmt.Println("shutting down")
 				return
 			} else {
-				//Om brukeren ikke gir gyldig input i  Scanneren spor den paa nytt.
 				fmt.Print("Invalid answer. Do you want to regenerate the file? (j/n): ")
 			}
 		}
@@ -54,7 +46,6 @@ func ConvTemperature() {
 	}
 	defer outputFile.Close()
 
-	//Denne blokken skriver forste linje for den begynner paa loop.
 
 	scanner := bufio.NewScanner(inputFile)
     	if scanner.Scan() {
@@ -67,7 +58,7 @@ func ConvTemperature() {
     		fields := strings.Split(line, ";")
 
 		if fields[3] == "" {
-    		continue //Skipper om den ikke finner temperatur.
+    		continue 
 		}
 
 
@@ -128,7 +119,6 @@ return outputFile, nil
 
 
 func AverageTemp() {
-	//Aapner og leser linjene fra filen
 	file, err := os.Open("kjevik-temp-celsius-20220318-20230318.csv")
 	if err != nil {
 		log.Fatal(err)
@@ -136,11 +126,11 @@ func AverageTemp() {
 	defer file.Close()
 	scanner := bufio.NewScanner(file)
 
-	//Setter variablene sum og count til 0 for loopen begynner.
+
 	sum := 0.0
 	count := 0.0
 
-	//Loop som deler opp fields, og fortsetter om fields er under 4.
+
 	for scanner.Scan() {
 		fields := strings.Split(scanner.Text(), ";")
 		if len(fields) < 4 {
@@ -152,7 +142,6 @@ func AverageTemp() {
 			continue
 		}
 
-		//Legger alle temperaturverdiene i sammen i sum variablen. Plusser ogsaa paa 1 i count variablen.
 		sum += temperature
 		count++
 	}
@@ -162,7 +151,6 @@ func AverageTemp() {
 		fmt.Println("Vil du ha gjennomsnittstemperaturen i Celsius eller Fahrenheit? (celsius/fahrenheit)")
 		fmt.Scanln(&unit)
 
-		//Fahrenheit case
 		if strings.ToLower(unit) == "fahrenheit" {
 			average := (sum/float64(count))*1.8 + 32
 			fmt.Printf("Gjennomsnittstemperaturen i Fahrenheit er: %.2f\n", average)
@@ -244,8 +232,7 @@ func CountLines(inputFile string) int {
 
 
 
-func AverageTemp1(fileName string) (float64, error) {
-    //Aapner og leser linjene fra filen
+func Average(fileName string) (float64, error) {
     file, err := os.Open(fileName)
     if err != nil {
         return 0, err
@@ -253,11 +240,10 @@ func AverageTemp1(fileName string) (float64, error) {
     defer file.Close()
     scanner := bufio.NewScanner(file)
 
-    //Setter variablene sum og count til 0 for loopen begynner.
     sum := 0.0
     count := 0.0
 
-    //Loop som deler opp fields, og fortsetter om fields er under 4.
+    
     for scanner.Scan() {
         fields := strings.Split(scanner.Text(), ";")
         if len(fields) < 4 {
@@ -269,7 +255,7 @@ func AverageTemp1(fileName string) (float64, error) {
             continue
         }
 
-        //Legger alle temperaturverdiene i sammen i sum variablen. Plusser ogsaa paa 1 i count variablen.
+       
         sum += temperature
         count++
     }
