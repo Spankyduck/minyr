@@ -26,9 +26,8 @@ func TestCelsiusToFahrenheitString(t *testing.T) {
      }
 }
 
-// Forutsetter at vi kjenner strukturen i filen og denne implementasjon 
-// er kun for filer som inneholder linjer hvor det fjerde element
-// på linjen er verdien for temperatrmaaling i grader celsius
+
+
 func TestCelsiusToFahrenheitLine(t *testing.T) {
      type test struct {
 	input string
@@ -51,15 +50,12 @@ func TestCelsiusToFahrenheitLine(t *testing.T) {
 }
 
 func TestAverageTemp(t *testing.T) {
-    // Call the AverageTemp function with the file name
     result, err := yr.AverageTemp1("../kjevik-temp-celsius-20220318-20230318.csv")
 
-    // Verify that there was no error
     if err != nil {
         t.Errorf("Error while calculating average temperature: %v", err)
     }
 
-    // Verify that the result matches the expected result
     expected := 8.56
 
 tolerance := 0.01
