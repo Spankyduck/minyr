@@ -27,7 +27,7 @@ func main() {
 	option = strings.ToLower(strings.TrimSpace(option))
 
 	if option == "convert" {
-		err := yr.convert()
+		err := yr.Convert()
 		if err != nil {
 			fmt.Println("Error during temperature conversion:", err)
 			return

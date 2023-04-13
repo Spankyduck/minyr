@@ -1,15 +1,13 @@
 package yr
 
 import (
-	"testing"
 	"bufio"
 	"encoding/csv"
-	"math"
 	"io"
 	"os"
 	"strconv"
 	"strings"
-	"github.com/Spankyduck/minyr/yr"
+	"testing"
 )
 
 // antall linjer i filen er 16756
