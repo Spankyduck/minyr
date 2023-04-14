@@ -109,7 +109,7 @@ func Convert() error {
 		lineNo++
 	}
 
-	dataText := "Data er basert paa gyldig data (per 18.03.2023) (CC BY 4.0) fra Meteorologisk institutt (MET); endringen er gjort av Andreas Mørkesdal"
+	dataText := "Data er basert paa gyldig data (per 18.03.2023) (CC BY 4.0) fra Meteorologisk institutt (MET); endringen er gjort av Sebastian Garcia Jessen"
 	err = outputWriter.Write([]string{dataText})
 	if err != nil {
 		fmt.Println("Error writing data text to output file:", err)
